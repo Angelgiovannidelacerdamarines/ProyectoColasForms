@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace ProyectoColasForms
 {
@@ -117,39 +118,35 @@ namespace ProyectoColasForms
             contador = 0;
         }
 
-        public void Display()
+        public string Representar()
         {
-            Console.WriteLine("\n============= REPRESENTACIÓN VISUAL: COLA DE PRIORIDAD =============");
+            var sb = new StringBuilder();
+            sb.AppendLine("============= REPRESENTACIÓN VISUAL: COLA DE PRIORIDAD =============");
 
             if (IsEmpty())
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("   [ COLA DE PRIORIDAD VACÍA ]");
-                Console.ResetColor();
-                Console.WriteLine("====================================================================");
-                return;
+                sb.AppendLine("   [ COLA DE PRIORIDAD VACÍA ]");
+                sb.AppendLine("====================================================================");
+                return sb.ToString();
             }
 
-            Console.Write("  FRONT -> ");
+            sb.Append("  FRONT -> ");
             NodoP? actual = frente;
             while (actual != null)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write($"[ {actual.Valor} | P:{actual.Prioridad} ]");
-                Console.ResetColor();
+                sb.Append($"[ {actual.Valor} | P:{actual.Prioridad} ]");
 
                 if (actual.Siguiente != null)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.Write(" ---> ");
-                    Console.ResetColor();
-                }
+                    sb.Append(" ---> ");
+
                 actual = actual.Siguiente;
             }
-            Console.WriteLine(" <- REAR");
+            sb.AppendLine(" <- REAR");
 
-            Console.WriteLine($"\n  Elementos: {Size()} | Capacidad: Ilimitada | Mayor número = mayor prioridad");
-            Console.WriteLine("====================================================================\n");
+            sb.AppendLine();
+            sb.AppendLine($"  Elementos: {Size()} | Capacidad: Ilimitada | Mayor número = mayor prioridad");
+            sb.AppendLine("====================================================================");
+            return sb.ToString();
         }
     }
 }

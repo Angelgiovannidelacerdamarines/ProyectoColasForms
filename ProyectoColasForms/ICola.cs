@@ -12,7 +12,7 @@
         int Capacity();         // -1 = ilimitada (cola dinámica)
         int Search(int valor);  // posición desde el frente (1..n) o -1
         void Clear();
-        void Display();
+        string Representar();   // representación visual en texto (la muestra el formulario)
     }
 
     public interface IColaPrioridad : ICola
