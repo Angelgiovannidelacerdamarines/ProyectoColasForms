@@ -1,5 +1,6 @@
 ﻿using ProyectoColasForms;
 using System;
+using System.Text;
 
 namespace ProyectoColasForms
 {
@@ -82,30 +83,27 @@ namespace ProyectoColasForms
             contador = 0;
         }
 
-        public void Display()
+        public string Representar()
         {
-            Console.WriteLine("\n================ REPRESENTACIÓN VISUAL DE LA COLA ================");
+            var sb = new StringBuilder();
+            sb.AppendLine("================ REPRESENTACIÓN VISUAL DE LA COLA ================");
 
             if (IsEmpty())
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("   [ COLA VACÍA ]");
-                Console.ResetColor();
-                Console.WriteLine("==================================================================");
-                return;
+                sb.AppendLine("   [ COLA VACÍA ]");
+                sb.AppendLine("==================================================================");
+                return sb.ToString();
             }
 
-            Console.Write("  FRONT (Frente) --> ");
+            sb.Append("  FRONT (Frente) --> ");
             for (int i = 0; i <= final; i++)
-            {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write($"[ {elementos[i]} ] ");
-                Console.ResetColor();
-            }
-            Console.WriteLine("<-- REAR (Último)");
+                sb.Append($"[ {elementos[i]} ] ");
+            sb.AppendLine("<-- REAR (Último)");
 
-            Console.WriteLine($"\n  Capacidad total: {Capacity()} | Elementos actuales: {Size()}");
-            Console.WriteLine("==================================================================\n");
+            sb.AppendLine();
+            sb.AppendLine($"  Capacidad total: {Capacity()} | Elementos actuales: {Size()}");
+            sb.AppendLine("==================================================================");
+            return sb.ToString();
         }
     }
 }

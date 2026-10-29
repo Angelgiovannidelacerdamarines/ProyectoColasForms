@@ -1,5 +1,6 @@
 ﻿using ProyectoColasForms;
 using System;
+using System.Text;
 
 namespace ProyectoColasForms
 {
@@ -81,33 +82,33 @@ namespace ProyectoColasForms
             contador = 0;
         }
 
-        public void Display()
+        public string Representar()
         {
-            Console.WriteLine("\n================ REPRESENTACIÓN VISUAL: COLA CIRCULAR ================");
+            var sb = new StringBuilder();
+            sb.AppendLine("================ REPRESENTACIÓN VISUAL: COLA CIRCULAR ================");
 
             if (IsEmpty())
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("   [ COLA CIRCULAR VACÍA ]");
-                Console.ResetColor();
-                Console.WriteLine("=======================================================================");
-                return;
+                sb.AppendLine("   [ COLA CIRCULAR VACÍA ]");
+                sb.AppendLine("=======================================================================");
+                return sb.ToString();
             }
 
-            Console.Write("  Arreglo Físico: ");
+            sb.Append("  Arreglo Físico: ");
             for (int i = 0; i < capacidad; i++)
             {
                 // Un índice está ocupado si su distancia al frente (circular) es menor que 'contador'
                 bool ocupado = ((i - frente + capacidad) % capacidad) < contador;
 
-                Console.ForegroundColor = ocupado ? ConsoleColor.Cyan : ConsoleColor.DarkGray;
-                Console.Write(ocupado ? $"[{i}: {elementos[i]}] " : $"[{i}: --] ");
-                Console.ResetColor();
+                sb.Append(ocupado ? $"[{i}: {elementos[i]}] " : $"[{i}: --] ");
             }
 
-            Console.WriteLine($"\n\n  Puntero FRENTE: Índice [{frente}] | Puntero FINAL: Índice [{final}]");
-            Console.WriteLine($"  Elementos activos: {Size()} / Capacidad: {Capacity()}");
-            Console.WriteLine("=======================================================================\n");
+            sb.AppendLine();
+            sb.AppendLine();
+            sb.AppendLine($"  Puntero FRENTE: Índice [{frente}] | Puntero FINAL: Índice [{final}]");
+            sb.AppendLine($"  Elementos activos: {Size()} / Capacidad: {Capacity()}");
+            sb.AppendLine("=======================================================================");
+            return sb.ToString();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using ProyectoColasForms;
 using System;
+using System.Text;
 
 namespace ProyectoColasForms
 {
@@ -93,39 +94,35 @@ namespace ProyectoColasForms
             contador = 0;
         }
 
-        public void Display()
+        public string Representar()
         {
-            Console.WriteLine("\n================ REPRESENTACIÓN VISUAL DE LA COLA DINÁMICA ================");
+            var sb = new StringBuilder();
+            sb.AppendLine("================ REPRESENTACIÓN VISUAL DE LA COLA DINÁMICA ================");
 
             if (IsEmpty())
             {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("   [ FRONT: null ] -> [ REAR: null ] (Cola Vacía)");
-                Console.ResetColor();
-                Console.WriteLine("==========================================================================");
-                return;
+                sb.AppendLine("   [ FRONT: null ] -> [ REAR: null ] (Cola Vacía)");
+                sb.AppendLine("==========================================================================");
+                return sb.ToString();
             }
 
-            Console.Write("  FRONT -> ");
+            sb.Append("  FRONT -> ");
             Nodo? actual = frente;
             while (actual != null)
             {
-                Console.ForegroundColor = ConsoleColor.Cyan;
-                Console.Write($"[ Nodo: {actual.Valor} ]");
-                Console.ResetColor();
+                sb.Append($"[ Nodo: {actual.Valor} ]");
 
                 if (actual.Siguiente != null)
-                {
-                    Console.ForegroundColor = ConsoleColor.DarkYellow;
-                    Console.Write(" ---> ");
-                    Console.ResetColor();
-                }
+                    sb.Append(" ---> ");
+
                 actual = actual.Siguiente;
             }
-            Console.WriteLine(" <- REAR");
+            sb.AppendLine(" <- REAR");
 
-            Console.WriteLine($"\n  Elementos en memoria: {Size()} | Capacidad: Ilimitada (memoria dinámica)");
-            Console.WriteLine("==========================================================================\n");
+            sb.AppendLine();
+            sb.AppendLine($"  Elementos en memoria: {Size()} | Capacidad: Ilimitada (memoria dinámica)");
+            sb.AppendLine("==========================================================================");
+            return sb.ToString();
         }
     }
 }
